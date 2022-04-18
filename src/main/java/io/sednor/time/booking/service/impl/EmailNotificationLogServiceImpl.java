@@ -10,6 +10,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.time.LocalDateTime;
+
 @Service
 @AllArgsConstructor
 public class EmailNotificationLogServiceImpl implements EmailNotificationLogService {
@@ -18,6 +21,7 @@ public class EmailNotificationLogServiceImpl implements EmailNotificationLogServ
     private final EmailNotificationService emailNotificationService;
 
     @Override
+    @Transactional
     public EmailNotificationLogDto createAndSend(EmailNotificationLogDto dto) {
         emailNotificationService.send(dto.getEmail());
         EmailNotificationLogEntity saved = emailNotificationLogRepository.save(dto.toEntity());
