@@ -6,10 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Data
 @Entity
@@ -24,7 +23,11 @@ public class EmailNotificationLogEntity {
     private Long time;
     private LocalDateTime createdDate;
 
-    public EmailNotificationLogDto toDto(){
+    @OneToMany(mappedBy = "emailNotificationLogEntity",
+            cascade = CascadeType.PERSIST)
+    private Set<ServiceEntity> serviceEntity;
+
+    public EmailNotificationLogDto toDto() {
         return EmailNotificationLogDto
                 .builder()
                 .id(this.id)
