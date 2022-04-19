@@ -1,6 +1,8 @@
 package io.sednor.time.booking.service;
 
+import io.sednor.time.booking.controller.dto.EmailNotificationLogDto;
+
 public interface EmailNotificationService {
 
-    void send(String email);
+    void send(EmailNotificationLogDto emailNotificationLogDto);
 }

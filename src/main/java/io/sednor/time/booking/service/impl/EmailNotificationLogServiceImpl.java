@@ -23,7 +23,7 @@ public class EmailNotificationLogServiceImpl implements EmailNotificationLogServ
     @Override
     @Transactional
     public EmailNotificationLogDto createAndSend(EmailNotificationLogDto dto) {
-        emailNotificationService.send(dto.getEmail());
+        emailNotificationService.send(dto);
         EmailNotificationLogEntity saved = emailNotificationLogRepository.save(dto.toEntity());
         return saved.toDto();
     }
